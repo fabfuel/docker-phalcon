@@ -10,3 +10,6 @@ RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql
 RUN cd ~; git clone https://github.com/phalcon/cphalcon -b master --single-branch
 RUN cd ~/cphalcon/build; ./install; rm -rf ~/cphalcon
 RUN echo extension=phalcon.so > /usr/local/etc/php/conf.d/phalcon.ini
+
+# enable Apache's mod_rewrite
+RUN cd /etc/apache2/mods-enabled && ln -s ../mods-available/rewrite.load rewrite.load
