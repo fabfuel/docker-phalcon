@@ -17,8 +17,7 @@
 </head>
 <body>
 	<h1><?php echo "Hello ".(isset($_ENV["NAME"])?$_ENV["NAME"]:"world")."!"; ?></h1>
-	<?php if (isset($_ENV["HOSTNAME_NGINX"])): ?><h3>nginx host: <?php echo $_ENV["HOSTNAME_NGINX"]; ?></h3><?php endif; ?>
-	<?php if (isset($_ENV["HOSTNAME_FPM"])): ?><h3>FPM host: <?php echo $_ENV["HOSTNAME_FPM"]; ?></h3><?php endif; ?>
+  <h3>Hostname: <?php echo gethostname(); ?></h3>
 	<?php
 	$links = [];
 	foreach($_ENV as $key => $value) {
@@ -43,12 +42,16 @@
 		?>
 	<?php
 	}
+  ?>
 
-	if(isset($_ENV["TUTUM_AUTH"])) {
-		?>
+  <?php if (ini_get('newrelic.enabled')): ?>
+		<h3>I report to NewRelic!</h3>
+    Lizense: <b><?= substr(ini_get('newrelic.license'), 0, 6); ?>...</b><br/>
+    App name: <b><?= ini_get('newrelic.appname'); ?></b><br/>
+  <?php endif; ?>
+
+  <?php if(isset($_ENV["TUTUM_AUTH"])): ?>
 		<h3>I have Tutum API powers!</h3>
-		<?php
-	}
-	?>
+  <?php endif; ?>
 </body>
 </html>
