@@ -12,8 +12,8 @@ RUN cd ~; git clone https://github.com/phalcon/cphalcon -b master --single-branc
 
 # enable Apache's mod_rewrite and change document root to: /var/www/html/public
 RUN cd /etc/apache2/mods-enabled && ln -s ../mods-available/rewrite.load rewrite.load
-RUN sed -i 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/public/g' /etc/apache2/apache2.conf
-RUN sed -i 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/public/g' /etc/apache2/sites-available/*.conf
+RUN sed -i 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/public#g' /etc/apache2/apache2.conf
+RUN sed -i 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/public#g' /etc/apache2/sites-available/*.conf
 
 # install NewRelic
 RUN (wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
